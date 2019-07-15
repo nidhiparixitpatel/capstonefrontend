@@ -32,7 +32,7 @@ export default function HomeScreen() {
         <View style={styles.getStartedContainer}>
           <DevelopmentModeNotice />
 
-          <Text style={styles.getStartedText}>PERIODS</Text>
+          <Text style={styles.getStartedText}>NIVS CAPSTONE</Text>
 
           <View
             style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>

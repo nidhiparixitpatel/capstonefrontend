@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, View, Text } from 'react-native';
-// import NewsFeed from '../components/NewsFeed';
+import NewsFeed from '../components/NewsFeed';
 // import Bio from '../components/Bio';
 
 function ProfileScreen() {
@@ -11,9 +11,10 @@ function ProfileScreen() {
    alignItems:'center',
    justifyContent:'center'
   }}>
+  <Text>PROFILE</Text>
 
-  {/* <Bio/>BIO
-  <NewsFeed/>NewsFeed */}
+  {/* <Bio/> */}
+  <NewsFeed/>
   <Button title="Go to Home screen"
     onPress={() => this.props.navigation.navigate('Home')}
    />

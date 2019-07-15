@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import emoji from 'emoji-dictionary';
-
-import './Post.css';
+// import './Post.css';
 
 
 class Post extends Component {
@@ -12,11 +10,11 @@ class Post extends Component {
   }
 
   render() {
-    let foundEmoji = ""
-    if(this.props.emoji){
+    // let foundEmoji = ""
+    // if(this.props.emoji){
       
-      foundEmoji = emoji.getUnicode(this.props.emoji)
-    }
+    //   foundEmoji = emoji.getUnicode(this.props.emoji)
+    // }
     return (
       <View>
         <Text>{this.props.user}</Text>

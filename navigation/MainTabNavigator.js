@@ -103,11 +103,11 @@ CycleStack.path = '';
 
 
 const tabNavigator = createBottomTabNavigator({
+  CycleStack,
   HomeStack,
   ProfileStack,
   MessagesStack,
   SettingsStack,
-  CycleStack,
 });
 
 tabNavigator.path = '';

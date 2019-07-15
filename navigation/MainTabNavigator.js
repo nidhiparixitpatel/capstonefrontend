@@ -4,9 +4,10 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import ProfileScreen from '../screens/LinksScreen';
+import MessagesScreen from '../screens/MessagesScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import CycleScreen from '../screens/CycleScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -25,10 +26,7 @@ HomeStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+      name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'
       }
     />
   ),
@@ -36,21 +34,21 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const MessagesStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Links: MessagesScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+MessagesStack.navigationOptions = {
+  tabBarLabel: 'Messages',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-mail' : 'md-mail'} />
   ),
 };
 
-LinksStack.path = '';
+MessagesStack.path = '';
 
 
 const ProfileStack = createStackNavigator(
@@ -85,11 +83,31 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = '';
 
+const CycleStack = createStackNavigator(
+  {
+    Settings: CycleScreen,
+  },
+  config
+);
+
+CycleStack.navigationOptions = {
+  tabBarLabel: 'Cycle',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-sync' : 'md-sync'} />
+  ),
+};
+
+CycleStack.path = '';
+
+
+
+
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   ProfileStack,
-  LinksStack,
+  MessagesStack,
   SettingsStack,
+  CycleStack,
 });
 
 tabNavigator.path = '';

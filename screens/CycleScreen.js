@@ -1,9 +1,8 @@
 import React from 'react';
 import { Button, View, Text } from 'react-native';
 // import NewsFeed from '../components/NewsFeed';
-// import Bio from '../components/Bio';
 
-function ProfileScreen() {
+function CycleScreen() {
 
  return (
   <View style={{ 
@@ -21,8 +20,8 @@ function ProfileScreen() {
 );
 }
 
-ProfileScreen.navigationOptions = {
-  title: 'Profile',
+CycleScreen.navigationOptions = {
+  title: 'Cycle',
 };
 
-export default ProfileScreen;
+export default CycleScreen;

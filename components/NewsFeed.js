@@ -4,8 +4,6 @@ import Post from './Post';
 // import PropTypes from 'prop-types';
 // import axios from 'axios';
 
-
-
 export default class NewsFeed extends Component {
 
     constructor() {
@@ -15,8 +13,8 @@ export default class NewsFeed extends Component {
       error: "",
       // deleteCardCallBack: this.deleteCard,
       // addCardCallBack: this.addCard,
-    };
-  }
+      };
+    } 
 
   render() {
 
@@ -27,7 +25,7 @@ export default class NewsFeed extends Component {
                 // content={card["card"]["text"]}
                 // timestamp={card["card"]["emoji"]}
                 // deleteCardCallBack = {this.state.deleteCardCallBack}
-      />
+                />
     })
 
     return (
@@ -38,6 +36,9 @@ export default class NewsFeed extends Component {
     )
   }
 }
+
+
+
 
 
 // class NewsFeed extends React.Component {

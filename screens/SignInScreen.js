@@ -8,9 +8,13 @@ import {
   TextInput,
   Button
 } from 'react-native';
-
+// import AuthHelperMethods from '../components/AuthHelperMethods';
+import axios from 'axios';
 
 export default class SignInScreen extends React.Component {
+
+  // Auth = new AuthHelperMethods();
+
   constructor() {
     super();
     this.state = {
@@ -22,30 +26,32 @@ export default class SignInScreen extends React.Component {
   static navigationOptions = {
     title: 'Sign In',
   };
-
-  // onInputChange = (event) => {
-  //   const updatedState = {};
   
-  //   const field = event.target.name;
-  //   const value = event.target.value;
-  
-  //   updatedState[field] = value;
-  //   this.setState(updatedState);
-
-  // }
-
-  // handleEmailChange = (event) => {
-  //   const new_email =  event.target.value
-  //   this.setState({ email: new_email });
-  // };
-  
-  // handlePasswordChange = (password: string) => {
-  //   this.setState({ password: password });
-  // };
-  
-  handleLoginPress = () => {
+  handleLoginPress = (event) => {
     console.log("Login button pressed");
-  };
+    event.preventDefault();
+        /* Here is where all the login logic will go. Upon clicking the login button, we would like to utilize a login method that will send our entered credentials over to the server for verification. Once verified, it should store your token and send you to the protected route. */
+        axios.post("http://localhost:8000/main/auth/login/",{
+          email: this.state.email,
+          password: this.state.password
+        })
+        .then((response) => {
+          console.log(response)
+          const token = response.data.token
+          _signInAsync = async (token) => {
+            await AsyncStorage.setItem('token', token);
+          };
+          _signInAsync(token)
+          this.props.navigation.navigate('App');
+          // console.log(AsyncStorage.getItem(key: 'token'))
+        // deviceStorage.saveKey("id_token", response.data.jwt);
+        // this.props.newJWT(response.data.jwt);
+        })
+        .catch((error) => {
+        console.log(error);
+        });
+  }
+
 
   render() {
     return (
@@ -55,11 +61,11 @@ export default class SignInScreen extends React.Component {
             onChangeText={(email) => this.setState({email})}
             value={this.state.email}
           />
-          {/* <TextInput
+          <TextInput
+            placeholder="Password"
+            onChangeText={(password) => this.setState({password})}
             value={this.state.password}
-            onChangeText={this.handlePasswordChange}
-            placeholder={strings.PASSWORD_PLACEHOLDER}
-          /> */}
+          />
           <Button
             title="Sign in"
             onPress={this.handleLoginPress}
@@ -69,11 +75,14 @@ export default class SignInScreen extends React.Component {
     );
   }
 
-  _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('App');
-  };
+  // _signInAsync = async () => {
+  //   await AsyncStorage.setItem('userToken', 'abc');
+  //   this.props.navigation.navigate('App');
+  // };
 }
+
+
+
 
 
 // render() {
@@ -85,3 +94,31 @@ export default class SignInScreen extends React.Component {
 // }
 
 
+// axios.post("http://localhost:8000/main/auth/login/",{
+//   email: this.state.email,
+//   password: this.state.password
+// })
+// .then((response) => {
+// // deviceStorage.saveKey("id_token", response.data.jwt);
+// // this.props.newJWT(response.data.jwt);
+// })
+// .catch((error) => {
+// console.log(error);
+// });
+// }
+
+// handleLoginPress = (event) => {
+//   console.log("Login button pressed");
+//   event.preventDefault();
+//       /* Here is where all the login logic will go. Upon clicking the login button, we would like to utilize a login method that will send our entered credentials over to the server for verification. Once verified, it should store your token and send you to the protected route. */
+//       this.Auth.login(this.state.username, this.state.password)
+//           .then(res => {
+//               if (res === false) {
+//                   return alert("Sorry those credentials don't exist!");
+//               }
+//               this.props.history.replace('/');
+//           })
+//           .catch(err => {
+//               alert(err);
+//           })
+// };

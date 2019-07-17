@@ -8,11 +8,21 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Button,
+  AsyncStorage,
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
 
 export default function HomeScreen() {
+
+  handleLogOutPress = (event) => {
+    console.log("Logout button pressed");
+    event.preventDefault();
+    AsyncStorage.removeItem('token');
+    this.props.navigation.navigate('Profile');
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -42,6 +52,11 @@ export default function HomeScreen() {
           <Text style={styles.getStartedText}>
             Change this text and your app will automatically reload.
           </Text>
+
+          <Button
+            title="Log Out"
+            onPress={this.handleLogOutPress}
+          />
         </View>
 
         <View style={styles.helpContainer}>

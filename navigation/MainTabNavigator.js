@@ -108,8 +108,21 @@ const tabNavigator = createBottomTabNavigator({
   ProfileStack,
   MessagesStack,
   SettingsStack,
+}, {
+  initialRouteName: 'HomeStack'
 });
 
 tabNavigator.path = '';
 
 export default tabNavigator;
+
+
+// const AppNavigator = createDrawerNavigator({
+//   Home: { screen: HomeStackNavigator },
+//   Calendar: { screen: CalendarStackNavigator },
+//   Profile: { screen: Profile },
+// }, {
+//   contentComponent: Menu,
+//   drawerWidth: widthPercentageToDP('100%'),
+//   initialRouteName: 'Calendar'
+// });

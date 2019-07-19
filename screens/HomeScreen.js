@@ -11,20 +11,33 @@ import {
   Button,
   AsyncStorage,
 } from 'react-native';
+import { connect } from 'react-redux';
+import { addToken } from '../Actions';
+import { bindActionCreators } from 'redux';
+
 
 import { MonoText } from '../components/StyledText';
 
-export default function HomeScreen() {
+class HomeScreen extends React.Component {
 
-  handleLogOutPress = (event) => {
-    console.log("Logout button pressed");
-    event.preventDefault();
-    AsyncStorage.removeItem('token');
-    this.props.navigation.navigate('Profile');
+  constructor(props) {
+    super(props);
+    this.addTokenToState();
+
   }
 
-  return (
-    <View style={styles.container}>
+  addTokenToState = async () => {
+    console.log("before jwt")
+    console.log(this.props.token.jwt)
+    const userToken = await AsyncStorage.getItem('token');
+    this.props.addToken(userToken);
+  };
+
+
+  render() {
+
+    return (
+      <View style={styles.container}>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
@@ -44,6 +57,8 @@ export default function HomeScreen() {
 
           <Text style={styles.getStartedText}>NIVS CAPSTONE</Text>
 
+          <Text>our token is { this.props.token.jwt } </Text>
+
           <View
             style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
             <MonoText>screens/HomeScreen.js</MonoText>
@@ -53,10 +68,7 @@ export default function HomeScreen() {
             Change this text and your app will automatically reload.
           </Text>
 
-          <Button
-            title="Log Out"
-            onPress={this.handleLogOutPress}
-          />
+      
         </View>
 
         <View style={styles.helpContainer}>
@@ -82,7 +94,42 @@ export default function HomeScreen() {
       </View>
     </View>
   );
+  }
 }
+
+const mapStateToProps = (state) => {
+  const { token } = state
+  return { token }
+};
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    addToken,
+  }, dispatch)
+);
+
+const Connected = connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+// export default connect(mapStateToProps)(HomeScreen);
+
+
+class Test2 extends React.Component {
+  
+  render(){
+     return (<Connected/>);
+  }
+}
+
+export default Test2;
+
+
+
+
+
+
+
+
+
+
 
 HomeScreen.navigationOptions = {
   header: null,
@@ -110,6 +157,19 @@ function DevelopmentModeNotice() {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function handleLearnMorePress() {
   WebBrowser.openBrowserAsync(

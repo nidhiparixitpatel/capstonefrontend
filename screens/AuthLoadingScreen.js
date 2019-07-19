@@ -6,24 +6,37 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { addToken } from '../Actions';
+import { connect } from 'react-redux';
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
     super(props);
     this._bootstrapAsync();
+
   }
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('token');
+  
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
+    // if('token'){
+    //   this.props.navigation.navigate('App', { token: 'token' })
+    // } else {
+    //   this.props.navigation.navigate('Auth');
+    // }
+    // this.props.addToken(userToken);
     this.props.navigation.navigate('token' ? 'App' : 'Auth');
+    // this.props.navigation.navigate('Auth');
   };
 
   // Render any loading content that you like here
   render() {
+
     return (
       <View>
         <ActivityIndicator />
@@ -33,4 +46,31 @@ class AuthLoadingScreen extends React.Component {
   }
 }
 
+// const mapDispatchToProps = (dispatch, ownProps) => (
+//   bindActionCreators({
+//     addToken,
+//     ...ownProps,
+//     // navigate: (location) => props.navigation.navigate(location)
+//   }, dispatch)
+// );
+
+// const mapDispatchToProps = (dispatch, ownProps) => (
+//   bindActionCreators({
+//         addToken,
+//       }, dispatch),
+//   navigate: ownProps.navigation.navigate(location)
+// );
+
+
+// const Connected = connect(null, mapDispatchToProps)(AuthLoadingScreen);
+
 export default AuthLoadingScreen
+
+// class Test3 extends React.Component {
+  
+//   render(){
+//      return (<Connected/>);
+//   }
+// }
+
+// export default Test3;

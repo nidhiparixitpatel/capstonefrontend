@@ -16,7 +16,7 @@ function ProfileScreen() {
   {/* <Bio/> */}
   <NewsFeed/>
   <Button title="Go to Home screen"
-    onPress={() => this.props.navigation.navigate('Home')}
+    onPress={() => this.props.navigation.navigate('App')}
    />
   </View>
 );

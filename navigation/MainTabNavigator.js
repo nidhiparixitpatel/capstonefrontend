@@ -36,7 +36,7 @@ HomeStack.path = '';
 
 const MessagesStack = createStackNavigator(
   {
-    Links: MessagesScreen,
+    Messages: MessagesScreen,
   },
   config
 );
@@ -53,7 +53,8 @@ MessagesStack.path = '';
 
 const ProfileStack = createStackNavigator(
   {
-    Links: ProfileScreen,
+    Profile: ProfileScreen,
+    Home: HomeScreen
   },
   config
 );

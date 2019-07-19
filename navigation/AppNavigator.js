@@ -7,7 +7,7 @@ import SignInScreen from '../screens/SignInScreen';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 
 
-const AppStack = createStackNavigator({ Home: HomeScreen });
+// const AppStack = createStackNavigator({ Home: HomeScreen });
 const AuthStack = createStackNavigator({ SignIn: SignInScreen });
 
 // export default createAppContainer(

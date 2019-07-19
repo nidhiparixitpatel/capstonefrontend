@@ -27,23 +27,28 @@ export default class SignInScreen extends React.Component {
     title: 'Sign In',
   };
   
+ 
   handleLoginPress = (event) => {
     console.log("Login button pressed");
+    console.log(this.state.email)
+    console.log(this.state.password)
     event.preventDefault();
         /* Here is where all the login logic will go. Upon clicking the login button, we would like to utilize a login method that will send our entered credentials over to the server for verification. Once verified, it should store your token and send you to the protected route. */
-        axios.post("http://localhost:8000/main/auth/login/",{
+        axios.post("http://172.24.47.79:8000/main/auth/login/",{
           email: this.state.email,
           password: this.state.password
         })
         .then((response) => {
-          console.log(response)
+  
           const token = response.data.token
+          console.log(token)
           _signInAsync = async (token) => {
             await AsyncStorage.setItem('token', token);
           };
+
           _signInAsync(token)
+  
           this.props.navigation.navigate('App');
-          // console.log(AsyncStorage.getItem(key: 'token'))
         // deviceStorage.saveKey("id_token", response.data.jwt);
         // this.props.newJWT(response.data.jwt);
         })

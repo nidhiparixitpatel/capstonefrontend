@@ -42,11 +42,16 @@ export default class SignInScreen extends React.Component {
   
           const token = response.data.token
           console.log(token)
-          _signInAsync = async (token) => {
-            await AsyncStorage.setItem('token', token);
+          const id = String(response.data.user.pk)
+          console.log(id)
+
+          _signInAsync = async (token, id) => {
+            await AsyncStorage.multiSet([['token', token], ['id', id]]);
+    
           };
 
-          _signInAsync(token)
+          _signInAsync(token, id)
+
   
           this.props.navigation.navigate('App');
         // deviceStorage.saveKey("id_token", response.data.jwt);

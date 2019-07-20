@@ -5,10 +5,12 @@ import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import SignInScreen from '../screens/SignInScreen';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 
 // const AppStack = createStackNavigator({ Home: HomeScreen });
 const AuthStack = createStackNavigator({ SignIn: SignInScreen });
+const SettingsStack = createStackNavigator({ Settings: SettingsScreen });
 
 // export default createAppContainer(
 //   createSwitchNavigator({
@@ -24,7 +26,7 @@ export default createAppContainer(createSwitchNavigator(
     AuthLoading: AuthLoadingScreen,
     App: MainTabNavigator,
     Auth: AuthStack,
-
+    Settings: SettingsStack
   },
   {
     initialRouteName: 'AuthLoading',

@@ -12,8 +12,9 @@ import {
   AsyncStorage,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { addToken } from '../Actions';
+import { addToken, addEmail, addId } from '../Actions';
 import { bindActionCreators } from 'redux';
+import axios from 'axios';
 
 
 import { MonoText } from '../components/StyledText';
@@ -22,17 +23,41 @@ class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.addTokenToState();
-
+    this.initializeState()
   }
 
+
+  initializeState = async () => {
+    await this.addTokenToState()
+    await this.addIdToState()
+    this.getEmail()
+  };
+
   addTokenToState = async () => {
-    console.log("before jwt")
-    console.log(this.props.token.jwt)
     const userToken = await AsyncStorage.getItem('token');
     this.props.addToken(userToken);
   };
 
+  addIdToState = async () => {
+    const id = await AsyncStorage.getItem('id');
+    this.props.addId(id)
+  };
+
+
+  getEmail = () => {
+    const AuthStr = 'Bearer '.concat(this.props.token.jwt)
+    axios.get(`http://172.24.47.79:8000/main/users/${this.props.token.id}`, { headers: { "Authorization" : AuthStr }
+      }).then((response) => {
+        // console.log(response.data.email)
+        this.props.addEmail(response.data.email)
+        })
+        .catch((error) => {
+        console.log(error);
+        });
+
+  }
+
+  
 
   render() {
 
@@ -53,20 +78,15 @@ class HomeScreen extends React.Component {
         </View>
 
         <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
+    
 
           <Text style={styles.getStartedText}>NIVS CAPSTONE</Text>
 
           <Text>our token is { this.props.token.jwt } </Text>
+          <Text>our email is { this.props.token.email }</Text>
+          <Text>our id is { this.props.token.id }</Text>
 
-          <View
-            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Change this text and your app will automatically reload.
-          </Text>
+          
 
       
         </View>
@@ -105,6 +125,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     addToken,
+    addEmail,
+    addId,
   }, dispatch)
 );
 

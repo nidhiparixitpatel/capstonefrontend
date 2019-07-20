@@ -18,8 +18,11 @@ export default function SettingsScreen() {
   handleLogOutPress = (event) => {
     console.log("Logout button pressed");
     event.preventDefault();
-    AsyncStorage.removeItem('token');
-    this.props.navigation.navigate('Auth');
+    _removeData = async () => {
+      await AsyncStorage.multiRemove(["token", "id"]);
+    };
+    _removeData()
+    // this.props.navigation.navigate('App');
   }
 
   return <View><ExpoConfigView />

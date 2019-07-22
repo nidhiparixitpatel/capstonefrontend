@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   jwt: "need to get",
   email: "not set yet",
   id: "still need to get",
+  name: "have not set",
 };
 
 const tokenReducer = (state = INITIAL_STATE, action) => {

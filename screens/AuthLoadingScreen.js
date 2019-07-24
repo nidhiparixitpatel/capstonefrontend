@@ -28,7 +28,7 @@ class AuthLoadingScreen extends React.Component {
     // if('token'){
     //   this.props.navigation.navigate('App', { token: 'token' })
     // } else {
-    //   this.props.navigation.navigate('Auth');
+      // this.props.navigation.navigate('Auth');
     // }
     // this.props.addToken(userToken);
     this.props.navigation.navigate(userToken ? 'App' : 'Auth');

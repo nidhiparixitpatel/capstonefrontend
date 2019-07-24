@@ -72,12 +72,7 @@ class Bio extends React.Component {
 
 
   render() {
-
     // this.getBio()
-    // if(this.props.emoji){
-      
-    //   foundEmoji = emoji.getUnicode(this.props.emoji)
-    // }
     return (
       <View>
         <Text>Name: {this.state.name}</Text>
@@ -85,7 +80,7 @@ class Bio extends React.Component {
         <Text>Menarche Date: {this.state.menarche_date}({this.state.age} years old)</Text>
         <Text>Average Cycle Length: {this.state.average_length} days</Text>
         <Text>Average Period Duration: {this.state.average_duration} days</Text>
-        <Text>Bio:{this.state.bio}</Text>
+        <Text>Bio: {this.state.bio}</Text>
         <Text>{this.state.friends.length} friends</Text>
         {/* <button className="btn btn-primary card__delete" onClick={this.onDelete} >
             Comment

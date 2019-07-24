@@ -15,6 +15,8 @@ import { connect } from 'react-redux';
 import { addToken, addEmail, addId } from '../Actions';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
+import NewsFeed from '../components/NewsFeed';
+import NewPostForm from '../components/NewPostForm';
 
 
 import { MonoText } from '../components/StyledText';
@@ -81,14 +83,20 @@ class HomeScreen extends React.Component {
     
 
           <Text style={styles.getStartedText}>NIVS CAPSTONE</Text>
-
-          <Text>our token is { this.props.token.jwt } </Text>
+{/* 
+          <Text>our token is { this.props.token.jwt } </Text> */}
           <Text>our email is { this.props.token.email }</Text>
-          <Text>our id is { this.props.token.id }</Text>
+          {/* <Text>our id is { this.props.token.id }</Text> */}
 
-          
+        </View>
 
-      
+        <View style={styles.getStartedContainer}>
+          <NewPostForm user={this.props.token.id}/>
+
+          <Text>NEWSFEED</Text>
+
+          <NewsFeed user={false}/>
+
         </View>
 
         <View style={styles.helpContainer}>

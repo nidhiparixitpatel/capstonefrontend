@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   email: "not set yet",
   id: "still need to get",
   name: "have not set",
+  results: [],
 };
 
 const tokenReducer = (state = INITIAL_STATE, action) => {
@@ -18,6 +19,9 @@ const tokenReducer = (state = INITIAL_STATE, action) => {
     
     case 'ADD_ID': 
       return {...state, id: action.payload}
+
+    case 'SEARCH_RESULTS':
+      return {...state, results: action.payload};
 
     default:
       return state

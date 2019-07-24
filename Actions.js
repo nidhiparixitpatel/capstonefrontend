@@ -19,3 +19,10 @@ export const addId = id => (
   }
 );
 
+export const searchResults = results => (
+  {
+    type: 'SEARCH_RESULTS',
+    payload: results,
+  }
+);
+

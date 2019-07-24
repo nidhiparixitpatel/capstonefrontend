@@ -8,6 +8,7 @@ import MessagesScreen from '../screens/MessagesScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import CycleScreen from '../screens/CycleScreen';
+import SearchScreen from '../screens/SearchScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -86,7 +87,7 @@ SettingsStack.path = '';
 
 const CycleStack = createStackNavigator(
   {
-    Settings: CycleScreen,
+    Cycle: CycleScreen,
   },
   config
 );
@@ -100,6 +101,22 @@ CycleStack.navigationOptions = {
 
 CycleStack.path = '';
 
+const SearchStack = createStackNavigator(
+  {
+    Search: SearchScreen,
+  },
+  config
+);
+
+SearchStack.navigationOptions = {
+  tabBarLabel: 'Search',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-search' : 'md-search'} />
+  ),
+};
+
+SearchStack.path = '';
+
 
 
 
@@ -108,6 +125,7 @@ const tabNavigator = createBottomTabNavigator({
   HomeStack,
   ProfileStack,
   MessagesStack,
+  SearchStack,
   SettingsStack,
 }, {
   initialRouteName: 'HomeStack'

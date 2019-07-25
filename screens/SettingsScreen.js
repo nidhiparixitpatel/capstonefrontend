@@ -6,9 +6,15 @@ import {
   View,
   Button,
   AsyncStorage,
-  TextInput
+  TextInput,
+  DatePickerIOS,
+  Picker
 } from 'react-native';
 import axios from 'axios';
+import { Actions } from 'react-native-router-flux';
+import NavBar from '../components/NavBar';
+import NumericInput from 'react-native-numeric-input'
+
 
 
 export default class SettingsScreen extends React.Component {
@@ -68,14 +74,18 @@ export default class SettingsScreen extends React.Component {
   }
 
 
+  setDate = (newDate) => {
+    this.setState({menarche_date: newDate});
+  }
+
   handleLogOutPress = (event) => {
     console.log("Logout button pressed");
     event.preventDefault();
     _removeData = async () => {
       await AsyncStorage.multiRemove(["token", "id"]);
+      Actions.signin()
     };
     _removeData()
-    // this.props.navigation.navigate('Auth');
   }
 
   onProfileSubmit = (event) => {
@@ -103,8 +113,9 @@ export default class SettingsScreen extends React.Component {
     flex: 1,
      alignItems:'center',
      justifyContent:'center'
-    }}>
-
+    }}> 
+    
+    <ScrollView>
 
     <Text>Edit Profile</Text>
       <TextInput
@@ -123,32 +134,55 @@ export default class SettingsScreen extends React.Component {
       />
 
 
-    {/* <Text>Edit Cycle</Text>
-    <TextInput
-            placeholder="Menarche Date"
-            onChangeText={(name) => this.setState({name})}
-            value={this.state.name}
-      />
-      <TextInput
+
+    <Text>Edit Cycle</Text>
+
+      <Text>Menarche Date</Text>
+
+    <DatePickerIOS
+          date={new Date()}
+          onDateChange={this.setDate}
+        />
+      
+
+      {/* <TextInput
             placeholder="Average Cycle Length"
             onChangeText={(average_length) => this.setState({average_length})}
             value={this.state.average_length}
-      />
-      <TextInput
+      /> */}
+       {/* <TextInput
+            placeholder="Menarche Date"
+            onChangeText={(name) => this.setState({name})}
+            value={this.state.name}
+      /> */}
+           {/* <TextInput
             placeholder="Average Period Duration"
             onChangeText={(average_duration) => this.setState({average_duration})}
             value={this.state.average_duration}
-      />
+      /> */}
+
+
+<Text>Average Cycle Length</Text>
+<NumericInput type='up-down' onChange={(average_length) => this.setState({average_length})} />
+
+
+
+<Text>Average Period Duration</Text>
+<NumericInput type='up-down' onChange={(average_duration) => this.setState({average_duration})} />
+
      <Button
           title="Change"
           onPress={this.onCycleSubmit}
-      /> */}
+      />
 
 
      <Button
             title="Log Out"
             onPress={this.handleLogOutPress}
         />
+      </ScrollView>
+    <NavBar />
+      
   </View>;
 }
 }

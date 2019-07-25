@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, TextInput, Text, ScrollView, TouchableOpacity, Button } from 'react-native';
-import SearchBar from '../components/SearchBar';
-import SearchResults from '../components/SearchResults';
 import { FontAwesome } from '@expo/vector-icons';
 import axios from 'axios';
+import NavBar from '../components/NavBar';
+import { ActionConst } from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 
 const styles = require('../components/SearchBarStyles');
 const styles2 = require('../components/SearchResultsStyles');
@@ -64,13 +65,14 @@ export default class SearchScreen extends React.Component {
         <View style={styles2.searchResultsContainer}>     
             {this.state.results.map((result, i) => (
                  <TouchableOpacity key={i}
-                    // onPress={() => {Linking.openURL(result.formattedUrl) }}
+                    onPress={() => Actions.profile({id: result.id})}
            >
           <Text>{result.email}</Text>
         </TouchableOpacity>
        ))}
      </View>
         </ScrollView>
+        <NavBar />
       </View>
     );
   }

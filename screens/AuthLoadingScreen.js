@@ -9,6 +9,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { addToken } from '../Actions';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -31,7 +32,8 @@ class AuthLoadingScreen extends React.Component {
       // this.props.navigation.navigate('Auth');
     // }
     // this.props.addToken(userToken);
-    this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+    // this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+    Actions.home()
     // this.props.navigation.navigate('App');
   };
 

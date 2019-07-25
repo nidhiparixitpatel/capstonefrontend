@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 // import AuthHelperMethods from '../components/AuthHelperMethods';
 import axios from 'axios';
+import { Actions } from 'react-native-router-flux';
 
 export default class SignInScreen extends React.Component {
 
@@ -47,13 +48,13 @@ export default class SignInScreen extends React.Component {
 
           _signInAsync = async (token, id) => {
             await AsyncStorage.multiSet([['token', token], ['id', id]]);
-    
+            Actions.home()
           };
 
           _signInAsync(token, id)
 
   
-          this.props.navigation.navigate('App');
+          // this.props.navigation.navigate('App');
         // deviceStorage.saveKey("id_token", response.data.jwt);
         // this.props.newJWT(response.data.jwt);
         })
@@ -62,6 +63,11 @@ export default class SignInScreen extends React.Component {
         });
   }
 
+  handleSignUpPress = (event) => {
+    console.log("Sign up");
+    Actions.register()
+    
+  }
 
   render() {
     return (
@@ -79,6 +85,11 @@ export default class SignInScreen extends React.Component {
           <Button
             title="Sign in"
             onPress={this.handleLoginPress}
+          />
+
+        <Button
+            title="Sign Up"
+            onPress={this.handleSignUpPress}
           />
       
       </View>

@@ -26,6 +26,7 @@ export default class NewsFeed extends Component {
       if(this.props.user === false){
         axios.get(`http://172.24.47.79:8000/main/posts/`).then((response) => {
           const updatedPosts = response.data
+          updatedPosts.reverse()
           this.setState({posts: updatedPosts})
       
         }).catch((error) => {
@@ -35,19 +36,21 @@ export default class NewsFeed extends Component {
       } else {
       axios.get(`http://172.24.47.79:8000/main/users/${this.props.user}/posts/`).then((response) => {
         const updatedPosts = response.data
+        updatedPosts.reverse()
         this.setState({posts: updatedPosts})
     
       }).catch((error) => {
         console.log(error);
         });
-    }
+      }
+
     }
 
 
 
   render() {
-    let currentPosts = this.state.posts.reverse()
-    let allPosts = currentPosts.map((post, i) => {
+  
+    let allPosts = this.state.posts.map((post, i) => {
               return <Post
                 key={i}
                 user={post["user"]}
@@ -59,7 +62,6 @@ export default class NewsFeed extends Component {
 
     return (
       <View>
-        <Text>NewsFeed</Text>
         <View>{allPosts}</View>
       </View>
     )

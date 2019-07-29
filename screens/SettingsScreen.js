@@ -4,13 +4,13 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button,
   AsyncStorage,
   TextInput,
   DatePickerIOS,
   Picker
 } from 'react-native';
 import axios from 'axios';
+import {Button} from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
 import NavBar from '../components/NavBar';
 import NumericInput from 'react-native-numeric-input'
@@ -91,7 +91,7 @@ export default class SettingsScreen extends React.Component {
   onProfileSubmit = (event) => {
     console.log("edit profile button pressed")
     event.preventDefault();
-    axios.put("http://172.24.47.79:8000/main/users/4/profile/1/",{
+    axios.put(`http://172.24.47.79:8000/main/users/${this.state.user}/profile/${this.state.profile_id}/`,{
       "id": `${this.state.profile_id}`,
       "user": `${this.state.user}`,
       "bio": `${this.state.bio}`,
@@ -106,6 +106,24 @@ export default class SettingsScreen extends React.Component {
     this.setState({bio: null})
     this.setState({name: null})
     this.setState({profile_id: null})
+  }
+
+  onCycleSubmit = (event) => {
+    console.log("edit cycle button pressed")
+    event.preventDefault();
+    axios.put(`http://172.24.47.79:8000/main/users/${this.state.user}/cycleinfo/${this.state.cycle_id}/`,{
+      "id": `${this.state.cycle_id}`,
+      "user": `${this.state.user}`,
+      "menarche_date": `${this.state.menarche_date}`,
+      "average_length": `${this.state.average_length}`,
+      "average_duration": `${this.state.average_duration}`
+  })
+    .then((response) => {
+
+    })
+    .catch((error) => {
+    console.log(error);
+    });
   }
 
   render() {
@@ -188,5 +206,5 @@ export default class SettingsScreen extends React.Component {
 }
 
 SettingsScreen.navigationOptions = {
-  title: 'app.json',
+  title: 'Settings',
 };

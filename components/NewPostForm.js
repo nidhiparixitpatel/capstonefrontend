@@ -7,11 +7,12 @@ import PropTypes from 'prop-types';
 import {
   Text,
   View,
-  Button,
   TextInput,
   AsyncStorage,
 } from 'react-native';
+import {Button} from 'react-native-elements'
 import axios from 'axios';
+import styles from '../stylesheets/NewPostFormStyles'
 
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 
@@ -45,9 +46,8 @@ class NewPostForm extends React.Component {
   render() {
 
     return (
-      <View>
-      <Text>-------------POST FORM----------------</Text>
-      <TextInput
+      <View style={styles.form}>
+      <TextInput style={styles.input}
             placeholder="How are you feeling today?"
             onChangeText={(content) => this.setState({content})}
             value={this.state.content}

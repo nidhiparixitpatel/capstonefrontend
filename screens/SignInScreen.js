@@ -6,8 +6,8 @@ import {
   StyleSheet,
   View,
   TextInput,
-  Button
 } from 'react-native';
+import {Button} from 'react-native-elements'
 // import AuthHelperMethods from '../components/AuthHelperMethods';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
@@ -36,6 +36,7 @@ export default class SignInScreen extends React.Component {
     event.preventDefault();
         /* Here is where all the login logic will go. Upon clicking the login button, we would like to utilize a login method that will send our entered credentials over to the server for verification. Once verified, it should store your token and send you to the protected route. */
         axios.post("http://172.24.47.79:8000/main/auth/login/",{
+          username: this.state.email,
           email: this.state.email,
           password: this.state.password
         })

@@ -44,18 +44,18 @@ export default function App(props) {
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <Provider store={ store }>
         {/* <AppNavigator /> */}
-          <Router hideNavBar= "false">
+          <Router hideNavBar="false">
           <Scene key="root">
           {/* <Scene key="start" component={MainTabNavigator} title="start"/>  */}
           <Scene key="loading" component={AuthLoadingScreen} title="loading"/> 
           <Scene key="signin" component={SignInScreen} title="signin"/> 
           <Scene key="register" component={RegisterScreen} title="register"/> 
-          <Scene key="home" component={HomeScreen} title="home"/> 
-          <Scene key="settings" component={SettingsScreen} title="settings"/>
-          <Scene key="cycle" component={CycleScreen} title="cycle" />
-          <Scene key="profile" component={ProfileScreen} title="profile"/> 
-          <Scene key="messages" component={MessagesScreen} title="messages"/> 
-          <Scene key="search" component={SearchScreen} title="search"/> 
+          <Scene key="home" component={HomeScreen} title="home" type="reset" hideNavBar={true}/> 
+          <Scene key="settings" component={SettingsScreen} title="settings" hideNavBar={true}/>
+          <Scene key="cycle" component={CycleScreen} title="cycle" hideNavBar={true} />
+          <Scene key="profile" component={ProfileScreen} title="profile" hideNavBar={true}/> 
+          <Scene key="messages" component={MessagesScreen} title="messages" hideNavBar={true}/> 
+          <Scene key="search" component={SearchScreen} title="search" hideNavBar={true}/> 
         </Scene>
       </Router> 
         </Provider>

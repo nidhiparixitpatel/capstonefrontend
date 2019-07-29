@@ -8,9 +8,10 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button,
   AsyncStorage,
+  Button,
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 class Bio extends React.Component {
   constructor() {
@@ -70,6 +71,9 @@ class Bio extends React.Component {
     this.setState({age: age})
   }
 
+  handleCalendarPress = () => {
+    Actions.cycle({id: this.props.user})
+  }
 
   render() {
     // this.getBio()
@@ -82,6 +86,10 @@ class Bio extends React.Component {
         <Text>Average Period Duration: {this.state.average_duration} days</Text>
         <Text>Bio: {this.state.bio}</Text>
         <Text>{this.state.friends.length} friends</Text>
+        <Button
+            title="Calendar"
+            onPress={this.handleCalendarPress}
+          />
         {/* <button className="btn btn-primary card__delete" onClick={this.onDelete} >
             Comment
         </button> */}

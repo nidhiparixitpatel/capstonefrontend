@@ -23,7 +23,6 @@ export default class SearchScreen extends React.Component {
     console.log("on search pressed!")
     axios.get(`http://172.24.47.79:8000/main/users/?search=${this.state.searchTerm}`
     ).then((response) => {
-      console.log(response.data)
       this.setState({results: response.data})
     })
     .catch((error) => {

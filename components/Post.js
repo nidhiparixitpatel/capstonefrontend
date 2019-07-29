@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import {
   Image,
   Platform,
@@ -12,6 +11,8 @@ import {
   AsyncStorage,
 } from 'react-native';
 import axios from 'axios';
+import TimeAgo from 'react-native-timeago';
+import styles from '../stylesheets/PostStyles';
 // import './Post.css';
 
 
@@ -21,14 +22,8 @@ class Post extends Component {
     super();
     this.state = {
     name: null,
-    // deleteCardCallBack: this.deleteCard,
-    // addCardCallBack: this.addCard,
     };
   } 
-
-  onDelete = () => {
-    this.props.deleteCardCallBack(this.props.id)
-  }
 
   componentDidMount() {
     this.getName()
@@ -46,27 +41,15 @@ class Post extends Component {
 
 
   render() {
-    // let foundEmoji = ""
-    // if(this.props.emoji){
-      
-    //   foundEmoji = emoji.getUnicode(this.props.emoji)
-    // }
     return (
-      <View>
-        <Text>A POST</Text>
+      <View style={styles.container}>
         <Text>{this.state.name}</Text>
-        <Text>{this.props.timestamp}</Text>
         <Text>{this.props.content}</Text>
+        <TimeAgo time={this.props.timestamp} />
       </View>
     )
   }
 }
 
-Post.propTypes = {
-  user: PropTypes.number,
-  timestamp: PropTypes.string,
-  content: PropTypes.string
-  // deleteCardCallBack: PropTypes.func.isRequired
-};
 
 export default Post;

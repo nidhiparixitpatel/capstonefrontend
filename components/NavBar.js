@@ -57,13 +57,13 @@ class NavBar extends React.Component {
       barColor: '#E64A19',
       pressColor: 'rgba(255, 255, 255, 0.16)'
     },
-    {
-      key: 'messages',
-      icon: 'mail',
-      label: 'Messages',
-      barColor: '#E64A19',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
-    }
+    // {
+    //   key: 'messages',
+    //   icon: 'mail',
+    //   label: 'Messages',
+    //   barColor: '#E64A19',
+    //   pressColor: 'rgba(255, 255, 255, 0.16)'
+    // }
   ]
 
   renderIcon = icon => ({ focused }) => (
@@ -91,9 +91,9 @@ class NavBar extends React.Component {
       case "profile":
         Actions.profile({id: this.state.id})
         break;
-      case "messages":
-         Actions.messages()
-        break;
+      // case "messages":
+      //    Actions.messages()
+      //   break;
       case "home":
         Actions.home()
         break;

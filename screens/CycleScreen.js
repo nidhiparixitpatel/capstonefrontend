@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button, View, Text, StyleSheet, Platform } from 'react-native';
+import { Button, View, Text, ScrollView } from 'react-native';
 // import NewsFeed from '../components/NewsFeed';
 import { Actions } from 'react-native-router-flux';
 import NavBar from '../components/NavBar';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import axios from 'axios';
+import styles from '../stylesheets/CycleScreenStyles';
 
 class CycleScreen extends React.Component {
   constructor() {
@@ -31,7 +32,7 @@ class CycleScreen extends React.Component {
   // };
 
   getCycle = () => {
-    axios.get(`http://172.24.47.79:8000/main/users/${this.props.id}/cycleinfo/`).then((response) => {
+    axios.get(`http://nivs-capstone.herokuapp.com/main/users/${this.props.id}/cycleinfo/`).then((response) => {
     
      
       this.setState({menarcheDate: response.data[0].menarche_date})
@@ -47,6 +48,7 @@ class CycleScreen extends React.Component {
   }
 
   predictDates = () => {
+    console.log("predict")
 
 
     // Date.prototype.addDays = function(days) {
@@ -83,6 +85,7 @@ class CycleScreen extends React.Component {
       }
     }
     this.setState({periodDates: dates})
+    console.log(this.state.periodDates)
     this.getMarkedDates()
   
   }
@@ -134,13 +137,14 @@ class CycleScreen extends React.Component {
   //  justifyContent:'center'
   // }}>
   <View style={styles.container}>
-  <Text>Cycle Stats</Text>
+  <ScrollView contentContainerStyle={styles.contentContainer}>
+  <View style={styles.infoContainer}>
 
-  <Text>Id {this.props.id}</Text>
-  <Text>Menarche Date{this.state.menarcheDate}</Text>
-  <Text>Average Duration{this.state.averageDuration}</Text>
-  <Text>Average Cycle Length{this.state.averageLength}</Text>
   <Text>Today is day number {this.state.numberDay}</Text>
+  <Text>Menarche Date: {this.state.menarcheDate}</Text>
+  <Text>Average Period Duration: {this.state.averageDuration} days</Text>
+  <Text>Average Cycle Length: {this.state.averageLength} days</Text>
+  </View>
   {/* <Text>{this.state.period_dates}</Text> */}
 
 {/* <Calendar
@@ -167,7 +171,7 @@ class CycleScreen extends React.Component {
   // Date marking style [simple/period/multi-dot/custom]. Default = 'simple'
   markingType={'period'}
 />
-
+  </ScrollView>
   <NavBar />
   </View>
 );
@@ -179,92 +183,3 @@ CycleScreen.navigationOptions = {
 };
 
 export default CycleScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
-});

@@ -13,6 +13,8 @@ import {
 import axios from 'axios';
 import TimeAgo from 'react-native-timeago';
 import styles from '../stylesheets/PostStyles';
+import { Actions } from 'react-native-router-flux';
+
 // import './Post.css';
 
 
@@ -30,7 +32,7 @@ class Post extends Component {
   }
 
   getName = () => {
-    axios.get(`http://172.24.47.79:8000/main/users/${this.props.user}/profile`).then((response) => {
+    axios.get(`http://nivs-capstone.herokuapp.com/main/users/${this.props.user}/profile`).then((response) => {
       this.setState({name: response.data[0].name}) 
 
     }).catch((error) => {
@@ -43,9 +45,13 @@ class Post extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>{this.state.name}</Text>
-        <Text>{this.props.content}</Text>
-        <TimeAgo time={this.props.timestamp} />
+         <TouchableOpacity 
+                    onPress={() => Actions.profile({id: this.props.user})}
+           >
+          <Text style={styles.name}>{this.state.name}</Text>
+        </TouchableOpacity>
+        <Text style={styles.content}>{this.props.content}</Text>
+        <TimeAgo style={styles.time} time={this.props.timestamp} />
       </View>
     )
   }

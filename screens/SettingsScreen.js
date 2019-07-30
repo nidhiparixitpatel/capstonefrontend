@@ -7,13 +7,13 @@ import {
   AsyncStorage,
   TextInput,
   DatePickerIOS,
-  Picker
+  Button
 } from 'react-native';
 import axios from 'axios';
-import {Button} from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
 import NavBar from '../components/NavBar';
-import NumericInput from 'react-native-numeric-input'
+import NumericInput from 'react-native-numeric-input';
+import styles from '../stylesheets/SettingsScreenStyles';
 
 
 
@@ -47,7 +47,7 @@ export default class SettingsScreen extends React.Component {
 
   getBio = () => {
     // const AuthStr = 'Bearer '.concat(this.props.token.jwt)
-    axios.get(`http://172.24.47.79:8000/main/users/${this.state.user}/profile/`).then((response) => {
+    axios.get(`http://nivs-capstone.herokuapp.com/main/users/${this.state.user}/profile/`).then((response) => {
      
         this.setState({bio: response.data[0].bio})
         this.setState({name: response.data[0].name})
@@ -60,7 +60,7 @@ export default class SettingsScreen extends React.Component {
   }
 
   getCycle = () => {
-    axios.get(`http://172.24.47.79:8000/main/users/${this.state.user}/cycleinfo`).then((response) => {
+    axios.get(`http://nivs-capstone.herokuapp.com/main/users/${this.state.user}/cycleinfo`).then((response) => {
      
       this.setState({menarche_date: response.data[0].menarche_date})
       this.setState({average_length: response.data[0].average_length})
@@ -91,7 +91,7 @@ export default class SettingsScreen extends React.Component {
   onProfileSubmit = (event) => {
     console.log("edit profile button pressed")
     event.preventDefault();
-    axios.put(`http://172.24.47.79:8000/main/users/${this.state.user}/profile/${this.state.profile_id}/`,{
+    axios.put(`http://nivs-capstone.herokuapp.com/main/users/${this.state.user}/profile/${this.state.profile_id}/`,{
       "id": `${this.state.profile_id}`,
       "user": `${this.state.user}`,
       "bio": `${this.state.bio}`,
@@ -111,7 +111,7 @@ export default class SettingsScreen extends React.Component {
   onCycleSubmit = (event) => {
     console.log("edit cycle button pressed")
     event.preventDefault();
-    axios.put(`http://172.24.47.79:8000/main/users/${this.state.user}/cycleinfo/${this.state.cycle_id}/`,{
+    axios.put(`http://nivs-capstone.herokuapp.com/main/users/${this.state.user}/cycleinfo/${this.state.cycle_id}/`,{
       "id": `${this.state.cycle_id}`,
       "user": `${this.state.user}`,
       "menarche_date": `${this.state.menarche_date}`,
@@ -127,77 +127,69 @@ export default class SettingsScreen extends React.Component {
   }
 
   render() {
-  return <View style={{
-    flex: 1,
-     alignItems:'center',
-     justifyContent:'center'
-    }}> 
+  return <View style={styles.container}> 
     
-    <ScrollView>
-
-    <Text>Edit Profile</Text>
-      <TextInput
+    <ScrollView contentContainerStyle={styles.contentContainer}>
+    <View style={styles.profile}>
+    <Text style={styles.title}>Edit Profile</Text>
+      <TextInput style={styles.input}
             placeholder="Name"
             onChangeText={(name) => this.setState({name})}
             value={this.state.name}
       />
-      <TextInput
+      <TextInput style={styles.input}
             placeholder="Bio"
             onChangeText={(bio) => this.setState({bio})}
             value={this.state.bio}
       />
      <Button
+          style={styles.button}
           title="Change"
           onPress={this.onProfileSubmit}
+          color="#cc5500"
       />
+  </View>
 
+    <View style={styles.cycle}>
+    <Text style={styles.title}>Edit Cycle</Text>
 
-
-    <Text>Edit Cycle</Text>
-
-      <Text>Menarche Date</Text>
-
+      {/* <Text>Menarche Date</Text>
+<View style={styles.picker}>
     <DatePickerIOS
           date={new Date()}
           onDateChange={this.setDate}
+          mode="date"
         />
-      
+</View> */}
 
-      {/* <TextInput
-            placeholder="Average Cycle Length"
-            onChangeText={(average_length) => this.setState({average_length})}
-            value={this.state.average_length}
-      /> */}
-       {/* <TextInput
-            placeholder="Menarche Date"
-            onChangeText={(name) => this.setState({name})}
-            value={this.state.name}
-      /> */}
-           {/* <TextInput
-            placeholder="Average Period Duration"
-            onChangeText={(average_duration) => this.setState({average_duration})}
-            value={this.state.average_duration}
-      /> */}
+<View style={styles.numeric}>
+<Text style={styles.text}>Average Cycle Length</Text>
 
-
-<Text>Average Cycle Length</Text>
 <NumericInput type='up-down' onChange={(average_length) => this.setState({average_length})} />
 
+</View>
 
-
-<Text>Average Period Duration</Text>
+<View style={styles.numeric}>
+<Text style={styles.text}>Average Period Duration</Text>
 <NumericInput type='up-down' onChange={(average_duration) => this.setState({average_duration})} />
+</View>
 
      <Button
           title="Change"
           onPress={this.onCycleSubmit}
+          style={styles.button}
+          color="#cc5500"
       />
+  </View>
 
-
-     <Button
+  <View style={styles.logout}>
+     <Button  
             title="Log Out"
             onPress={this.handleLogOutPress}
+            color="#cc5500"
         />
+</View>
+
       </ScrollView>
     <NavBar />
       

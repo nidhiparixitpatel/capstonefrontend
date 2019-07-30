@@ -1,5 +1,8 @@
 const React = require('react-native');
 const { Dimensions, StyleSheet } = React;
+// import {
+//   StyleSheet,
+// } from 'react-native';
 
 module.exports = StyleSheet.create({
   searchBarContainer: {
@@ -13,6 +16,13 @@ module.exports = StyleSheet.create({
     borderColor: 'lightgray',
     flex: 1
   },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  contentContainer: {
+    paddingTop: 50,
+  },
   textInputSearch: {
     flex: 8,
     borderColor: 'lightgray',
@@ -24,11 +34,32 @@ module.exports = StyleSheet.create({
   },
   textSearchButton: {
     flex: 1,
-    backgroundColor: 'lightgray',
+    // backgroundColor: 'lightgray',
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
     height: 40
+  },
+  searchResultsContainer: {
+    width: Dimensions.get('window').width - 20,
+    alignItems: 'center',
+    flex: 9
+  },
+  resultLink: {
+    display: 'flex',
+    backgroundColor: '#ddd',
+    borderRadius: 5,
+    height: 40,
+    width: Dimensions.get('window').width - 10,
+    marginVertical: 5,
+    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  result: {
+    marginBottom: 10,
+    color: "#cc5500",
+    fontSize: 17
   }
 })

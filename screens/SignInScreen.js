@@ -1,20 +1,18 @@
 import React from 'react';
 import {
-  ActivityIndicator,
   AsyncStorage,
-  StatusBar,
-  StyleSheet,
   View,
   TextInput,
+  Button
 } from 'react-native';
-import {Button} from 'react-native-elements'
-// import AuthHelperMethods from '../components/AuthHelperMethods';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
+import styles from '../stylesheets/SignInScreenStyles';
+import { Svg } from 'expo';
+import { Circle} from 'react-native-svg';
 
 export default class SignInScreen extends React.Component {
 
-  // Auth = new AuthHelperMethods();
 
   constructor() {
     super();
@@ -35,7 +33,7 @@ export default class SignInScreen extends React.Component {
     console.log(this.state.password)
     event.preventDefault();
         /* Here is where all the login logic will go. Upon clicking the login button, we would like to utilize a login method that will send our entered credentials over to the server for verification. Once verified, it should store your token and send you to the protected route. */
-        axios.post("http://172.24.47.79:8000/main/auth/login/",{
+        axios.post("http://nivs-capstone.herokuapp.com/main/auth/login/",{
           username: this.state.email,
           email: this.state.email,
           password: this.state.password
@@ -72,25 +70,48 @@ export default class SignInScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
+        <View style={styles.welcomeContainer}>
+      
+         <Svg
+           height="100"
+          width="100"
+          >   
+            <Circle
+              cx="50"
+              cy="50"
+              r="50"
+              fill="pink"
+            />
+        </Svg>
+        </View>
+
+        <View style={styles.form}>
           <TextInput
+            style={styles.input}
             placeholder="Email"
             onChangeText={(email) => this.setState({email})}
             value={this.state.email}
           />
           <TextInput
+            style={styles.input}
             placeholder="Password"
+            secureTextEntry={true}
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
           />
+        </View>
+
           <Button
-            title="Sign in"
+            title="Sign In"
             onPress={this.handleLoginPress}
+            color="#cc5500"
           />
 
         <Button
             title="Sign Up"
             onPress={this.handleSignUpPress}
+            color="#cc5500"
           />
       
       </View>

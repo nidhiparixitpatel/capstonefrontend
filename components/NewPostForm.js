@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-// import emoji from 'emoji-dictionary';
-// import './NewCardForm.css';
-
-// const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"]
 import {
   Text,
   View,
   TextInput,
-  AsyncStorage,
+  Button
 } from 'react-native';
-import {Button} from 'react-native-elements'
+// import {Button} from 'react-native-elements'
 import axios from 'axios';
 import styles from '../stylesheets/NewPostFormStyles'
-
-import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 
 
 class NewPostForm extends React.Component {
@@ -28,7 +21,7 @@ class NewPostForm extends React.Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    axios.post("http://172.24.47.79:8000/main/posts/",{
+    axios.post("http://nivs-capstone.herokuapp.com/main/posts/",{
       user: this.props.user,
       content: this.state.content
     })
@@ -55,6 +48,9 @@ class NewPostForm extends React.Component {
      <Button
           title="Share"
           onPress={this.onSubmit}
+          type="outline"
+          color="#cc5500"
+          style={styles.button}
       />
       </View>
     );

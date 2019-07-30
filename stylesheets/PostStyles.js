@@ -20,9 +20,24 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     marginTop: 20,
-    marginBottom: 20,
+    // marginBottom: 10,
     width: 350,
+    paddingBottom: 20,
   },
+  name: {
+    
+  },
+  content: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    fontSize: 15,
+    // color: 'rgba(96,100,109, 1)',
+    lineHeight: 17,
+    // textAlign: 'center',
+  },
+  time: {
+
+  }
   // input: {
   //   marginBottom: 30,
   //   width: 350,

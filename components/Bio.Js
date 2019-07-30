@@ -1,14 +1,8 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import axios from 'axios';
 import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
   Text,
-  TouchableOpacity,
   View,
-  AsyncStorage,
   Button,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
@@ -26,7 +20,6 @@ class Bio extends React.Component {
       friends: [],
       calendar: null,
     };
-    // this.getBio()
   }
 
   componentDidMount() {
@@ -36,7 +29,7 @@ class Bio extends React.Component {
 
   getBio = () => {
     // const AuthStr = 'Bearer '.concat(this.props.token.jwt)
-    axios.get(`http://172.24.47.79:8000/main/users/${this.props.user}/profile`).then((response) => {
+    axios.get(`http://nivs-capstone.herokuapp.com/main/users/${this.props.user}/profile`).then((response) => {
      
         this.setState({bio: response.data[0].bio})
         this.setState({name: response.data[0].name})
@@ -48,7 +41,7 @@ class Bio extends React.Component {
   }
 
   getCycle = () => {
-    axios.get(`http://172.24.47.79:8000/main/users/${this.props.user}/cycleinfo`).then((response) => {
+    axios.get(`http://nivs-capstone.herokuapp.com/main/users/${this.props.user}/cycleinfo`).then((response) => {
      
       this.setState({menarche_date: response.data[0].menarche_date})
       this.setState({average_length: response.data[0].average_length})
@@ -80,15 +73,14 @@ class Bio extends React.Component {
     return (
       <View>
         <Text>Name: {this.state.name}</Text>
-        <Text>Id: {this.props.user}</Text>
         <Text>Menarche Date: {this.state.menarche_date}({this.state.age} years old)</Text>
         <Text>Average Cycle Length: {this.state.average_length} days</Text>
         <Text>Average Period Duration: {this.state.average_duration} days</Text>
         <Text>Bio: {this.state.bio}</Text>
-        <Text>{this.state.friends.length} friends</Text>
         <Button
             title="Calendar"
             onPress={this.handleCalendarPress}
+            color="#cc5500"
           />
         {/* <button className="btn btn-primary card__delete" onClick={this.onDelete} >
             Comment

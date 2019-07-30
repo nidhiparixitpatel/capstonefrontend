@@ -20,7 +20,7 @@ import NewPostForm from '../components/NewPostForm';
 import NavBar from '../components/NavBar';
 import { Svg } from 'expo';
 import { Circle, Rect } from 'react-native-svg';
-
+import styles from '../stylesheets/HomeScreenStyles';
 
 import { Actions } from 'react-native-router-flux';
 
@@ -67,7 +67,7 @@ class HomeScreen extends React.Component {
     console.log(this.state.token)
     console.log(this.state.id)
     const AuthStr = 'Bearer '.concat(this.state.token)
-    axios.get(`http://172.24.47.79:8000/main/users/${this.state.id}/`, { headers: { "Authorization" : AuthStr }
+    axios.get(`http://nivs-capstone.herokuapp.com/main/users/${this.state.id}/`, { headers: { "Authorization" : AuthStr }
       }).then((response) => {
         // console.log(response.data.email)
         // this.props.addEmail(response.data.email)
@@ -80,8 +80,7 @@ class HomeScreen extends React.Component {
   }
 
   getCycle = () => {
-    axios.get(`http://172.24.47.79:8000/main/users/${this.state.id}/cycleinfo/`).then((response) => {
-     
+    axios.get(`http://nivs-capstone.herokuapp.com/main/users/${this.state.id}/cycleinfo`).then((response) => {
       this.setState({menarcheDate: response.data[0].menarche_date})
       this.setState({averageLength: response.data[0].average_length})
       this.getDayNumber()
@@ -92,7 +91,7 @@ class HomeScreen extends React.Component {
   }
 
   getDayNumber = () => {
-    console.log("in get daynumber")
+
     Date.prototype.addDays = function(days) {
       var date = new Date(this.valueOf());
       date.setDate(date.getDate() + days);
@@ -148,13 +147,12 @@ class HomeScreen extends React.Component {
 
           <Text style={styles.getStartedText}>Welcome { this.state.email }</Text>
           <Text>Day Number { this.state.numberDay}</Text>
+
     
         </View>
 
         <View style={styles.getStartedContainer}>
           <NewPostForm user={this.props.id}/>
-
-          <Text>NEWSFEED</Text>
 
           <NewsFeed user={false}/>
 
@@ -225,93 +223,3 @@ function DevelopmentModeNotice() {
     );
   }
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
-});

@@ -24,7 +24,7 @@ export default class NewsFeed extends Component {
     getPosts = () => {
 
       if(this.props.user === false){
-        axios.get(`http://172.24.47.79:8000/main/posts/`).then((response) => {
+        axios.get(`http://nivs-capstone.herokuapp.com/main/posts/`).then((response) => {
           const updatedPosts = response.data
           updatedPosts.reverse()
           this.setState({posts: updatedPosts})
@@ -34,7 +34,7 @@ export default class NewsFeed extends Component {
           });
 
       } else {
-      axios.get(`http://172.24.47.79:8000/main/users/${this.props.user}/posts/`).then((response) => {
+      axios.get(`http://nivs-capstone.herokuapp.com/main/users/${this.props.user}/posts/`).then((response) => {
         const updatedPosts = response.data
         updatedPosts.reverse()
         this.setState({posts: updatedPosts})
@@ -51,7 +51,7 @@ export default class NewsFeed extends Component {
   render() {
   
     let allPosts = this.state.posts.map((post, i) => {
-              return <Post
+              return <Post 
                 key={i}
                 user={post["user"]}
                 content={post["content"]}

@@ -1,13 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, TextInput, Text, ScrollView, TouchableOpacity, Button } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { View, TextInput, Text, ScrollView, TouchableOpacity, Button } from 'react-native';
 import axios from 'axios';
 import NavBar from '../components/NavBar';
-import { ActionConst } from 'react-native-router-flux';
 import { Actions } from 'react-native-router-flux';
-
-const styles = require('../components/SearchBarStyles');
-const styles2 = require('../components/SearchResultsStyles');
+import styles from '../stylesheets/SearchScreenStyles';
 
  
 export default class SearchScreen extends React.Component {
@@ -21,7 +17,7 @@ export default class SearchScreen extends React.Component {
 
   onSearchSubmit = () => {
     console.log("on search pressed!")
-    axios.get(`http://172.24.47.79:8000/main/users/?search=${this.state.searchTerm}`
+    axios.get(`http://nivs-capstone.herokuapp.com/main/users/?search=${this.state.searchTerm}`
     ).then((response) => {
       this.setState({results: response.data})
     })
@@ -34,10 +30,8 @@ export default class SearchScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView>
-        {/* <SearchBar/>
-        <SearchResults/> */}
-
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+  
         <View style={styles.searchBarContainer}>
   
       <TextInput
@@ -50,38 +44,24 @@ export default class SearchScreen extends React.Component {
 
         <Button
             title="Search"
-            onPress={this.onSearchSubmit} />
-
-      {/* <TouchableOpacity
-        style = {styles.textSearchButton}
-        onPress={this.onSearchSubmit}
-      >
-      <FontAwesome name="search" size={16} color="#000" />
-      </TouchableOpacity> */}
+            onPress={this.onSearchSubmit}
+            color="#cc5500"/>
 
     </View>
 
-        <View style={styles2.searchResultsContainer}>     
+        <View style={styles.searchResultsContainer}>     
             {this.state.results.map((result, i) => (
                  <TouchableOpacity key={i}
                     onPress={() => Actions.profile({id: result.id})}
            >
-          <Text>{result.email}</Text>
+          <Text style={styles.result}>{result.email}</Text>
         </TouchableOpacity>
        ))}
      </View>
+    
         </ScrollView>
         <NavBar />
       </View>
     );
   }
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });

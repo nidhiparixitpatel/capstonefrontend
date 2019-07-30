@@ -1,6 +1,7 @@
 import {
   StyleSheet, Platform,
 } from 'react-native';
+import { withTheme } from 'react-native-elements';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,6 +27,9 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     width: 350,
   },
+  button: {
+    color: "#cc5500",
+  }
 });
 
 export default styles

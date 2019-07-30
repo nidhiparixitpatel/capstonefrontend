@@ -23,10 +23,24 @@ class NavBar extends React.Component {
 
   tabs = [
     {
+      key: 'settings',
+      icon: 'options',
+      label: 'Settings',
+      barColor: '#B71C1C',
+      pressColor: 'rgba(255, 255, 255, 0.16)'
+    },
+    {
+      key: 'cycle',
+      icon: 'sync',
+      label: 'Cycle',
+      barColor: '#B71C1C',
+      pressColor: 'rgba(255, 255, 255, 0.16)'
+    },
+    {
       key: 'home',
       icon: 'home',
       label: 'Home',
-      barColor: '#388E3C',
+      barColor: '#B71C1C',
       pressColor: 'rgba(255, 255, 255, 0.16)'
     },
     {
@@ -37,24 +51,10 @@ class NavBar extends React.Component {
       pressColor: 'rgba(255, 255, 255, 0.16)'
     },
     {
-      key: 'cycle',
-      icon: 'sync',
-      label: 'Cycle',
-      barColor: '#E64A19',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
-    },
-    {
       key: 'profile',
       icon: 'contact',
       label: 'Profile',
-      barColor: '#E64A19',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
-    },
-    {
-      key: 'settings',
-      icon: 'options',
-      label: 'Settings',
-      barColor: '#E64A19',
+      barColor: '#B71C1C',
       pressColor: 'rgba(255, 255, 255, 0.16)'
     },
     // {

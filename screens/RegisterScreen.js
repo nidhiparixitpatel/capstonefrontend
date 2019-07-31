@@ -1,16 +1,14 @@
 import React from 'react';
 import {
-  ActivityIndicator,
-  AsyncStorage,
-  StatusBar,
-  StyleSheet,
   View,
   TextInput,
+  Button,
 } from 'react-native';
-import {Button} from 'react-native-elements'
-// import AuthHelperMethods from '../components/AuthHelperMethods';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
+import styles from '../stylesheets/RegisterScreenStyles';
+import { Svg } from 'expo';
+import { Circle} from 'react-native-svg';
 
 export default class RegisterScreen extends React.Component {
 
@@ -90,25 +88,43 @@ export default class RegisterScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
+         <View style={styles.welcomeContainer}>
+      
+      <Svg
+        height="100"
+       width="100"
+       >   
+         <Circle
+           cx="50"
+           cy="50"
+           r="50"
+           fill="pink"
+         />
+     </Svg>
+     </View>
           <TextInput
             placeholder="Email"
             onChangeText={(email) => this.setState({email})}
             value={this.state.email}
+            style={styles.input}
           />
           <TextInput
             placeholder="Password"
             onChangeText={(password1) => this.setState({password1})}
             value={this.state.password1}
+            style={styles.input}
           />
            <TextInput
             placeholder="Confirm password"
             onChangeText={(password2) => this.setState({password2})}
             value={this.state.password2}
+            style={styles.input}
           />
           <Button
-            title="Register"
+            title="Sign Up"
             onPress={this.handleRegisterPress}
+            color="#cc5500"
           />
       
       </View>

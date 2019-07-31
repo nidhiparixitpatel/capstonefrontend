@@ -49,7 +49,7 @@ export default function App(props) {
           {/* <Scene key="start" component={MainTabNavigator} title="start"/>  */}
           <Scene key="loading" component={AuthLoadingScreen} title="loading"/> 
           <Scene key="signin" component={SignInScreen} title="signin" hideNavBar={true}/> 
-          <Scene key="register" component={RegisterScreen} title="register"/> 
+          <Scene key="register" component={RegisterScreen} title="Sign Up"/> 
           <Scene key="home" component={HomeScreen} title="home" type="reset" hideNavBar={true}/> 
           <Scene key="settings" component={SettingsScreen} title="settings" hideNavBar={true}/>
           <Scene key="cycle" component={CycleScreen} title="cycle" hideNavBar={true} />

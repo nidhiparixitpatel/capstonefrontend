@@ -13,8 +13,16 @@ const styles = StyleSheet.create({
   infoContainer: {
     paddingTop: 30,
     alignItems: 'center',
-    paddingBottom: 30
+    textAlign: "left",
+    paddingBottom: 30,
   },
+  day: {
+    paddingTop: 20
+  },
+  sync:{
+    fontSize: 20,
+    paddingBottom: 20
+  }
 });
 
 export default styles

@@ -21,6 +21,7 @@ import NavBar from '../components/NavBar';
 import { Svg } from 'expo';
 import { Circle, Rect } from 'react-native-svg';
 import styles from '../stylesheets/HomeScreenStyles';
+// import * as Svg from 'react-native-svg';
 
 import { Actions } from 'react-native-router-flux';
 
@@ -146,7 +147,7 @@ class HomeScreen extends React.Component {
     
 
           <Text style={styles.getStartedText}>Welcome { this.state.email }</Text>
-          <Text>Day Number { this.state.numberDay}</Text>
+          <Text>Today is day number { this.state.numberDay}</Text>
 
     
         </View>

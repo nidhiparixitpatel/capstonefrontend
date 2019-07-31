@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
   title: {
     paddingTop: 40,
-    paddingBottom: 20,
+    paddingBottom: 15,
     fontSize: 20,
     textAlign: "center"
   },
@@ -43,11 +43,16 @@ const styles = StyleSheet.create({
     paddingTop: 40
   },
   numeric: {
-    textAlign: "center"
+    textAlign: "center",
+    alignItems: 'center',
   },
   text: {
+    paddingBottom: 10,
+    paddingTop: 10,
+  },
+  cycle: {
     textAlign: "center",
-    paddingLeft: 20
+    alignItems: 'center',
   }
 
  

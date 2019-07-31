@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, View, Text, ScrollView } from 'react-native';
+import { Button, View, Text, ScrollView, AsyncStorage } from 'react-native';
 // import NewsFeed from '../components/NewsFeed';
 import { Actions } from 'react-native-router-flux';
 import NavBar from '../components/NavBar';
@@ -14,22 +14,102 @@ class CycleScreen extends React.Component {
       menarcheDate: null,
       averageLength: null,
       averageDuration: null,
+      age: null,
       periodDates: [],
       markedDates: {},
-      numberDay: null
+      numberDay: null,
+      percentageSynced: null,
+      accountID: null,
+      accountPeriodDates: null,
+      accountMenarcheDate: null,
+      accountAverageLength: null,
+      accountAverageDuration: null,
     };
-    // this.initializeState()
+    this.addIdToState()
     
   }
 
   componentDidMount() {
     this.getCycle()
+    this.addIdToState()
   }
 
-  // initializeState = async () => {
-  //   await this.getCycle()
-  //   this.predictDates()
-  // };
+  addIdToState = async () => {
+    const id = await AsyncStorage.getItem('id');
+    this.setState({accountID: id})
+  };
+
+
+  getSync = () => {
+    axios.get(`http://nivs-capstone.herokuapp.com/main/users/${this.state.accountID}/cycleinfo/`).then((response) => {
+    
+     
+      this.setState({accountMenarcheDate: response.data[0].menarche_date})
+      this.setState({accountAverageLength: response.data[0].average_length})
+      this.setState({accountAverageDuration: response.data[0].average_duration})
+      this.accountPredictDates()
+    }).catch((error) => {
+      console.log(error);
+      });
+    
+
+  }
+
+  accountPredictDates = () => {
+  
+    Date.prototype.addDays = function(days) {
+      var date = new Date(this.valueOf());
+      date.setDate(date.getDate() + days);
+      return date;
+    }
+
+    accountMenarcheDateParsed = new Date(this.state.accountMenarcheDate)
+    const dates = []
+    let startDate = accountMenarcheDateParsed
+
+    for(let j=0;j<=480;j+=1){
+      for(let i=0; i<this.state.accountAverageDuration; i+=1){
+        const newDate = startDate.addDays(i)
+        dates.push(newDate)
+        if(i===this.state.accountAverageDuration-1) {
+          startDate = newDate.addDays(this.state.accountAverageLength-this.state.accountAverageDuration)
+        }
+      }
+    }
+    this.setState({accountPeriodDates: dates})
+
+    this.setSync()
+  
+  }
+
+  setSync = () => {
+    let synced = Math.floor(Math.random() * 101)
+    if(this.props.id == this.state.accountID) {
+  
+      synced = 100
+    }
+    let longest = 0
+    this.state.accountPeriodDates.length > this.state.periodDates ? longest = this.state.accountPeriodDates.length : longest = this.state.periodDates.length
+    let array1 = this.state.accountPeriodDates
+    let array2 = this.state.periodDates
+    let count = 0
+    // for(let i = 0; i < longest; i++) { 
+    //   for(let j = 0; j < longest; j++) { 
+    //       if(array1[i] === array2[j]) { 
+    //         count += 1; 
+    //       } 
+    //   } 
+    // }
+
+
+    // let synced = count/longest
+    
+    this.setState({percentageSynced: synced})
+  }
+
+
+
+
 
   getCycle = () => {
     axios.get(`http://nivs-capstone.herokuapp.com/main/users/${this.props.id}/cycleinfo/`).then((response) => {
@@ -40,6 +120,8 @@ class CycleScreen extends React.Component {
       this.setState({averageDuration: response.data[0].average_duration})
       this.predictDates()
       this.getDayNumber()
+      this.getSync()
+      this.calculateAge(this.state.menarcheDate)
     
   
     }).catch((error) => {
@@ -48,32 +130,17 @@ class CycleScreen extends React.Component {
   }
 
   predictDates = () => {
-    console.log("predict")
-
-
-    // Date.prototype.addDays = function(days) {
-    //   const tempDate = new Date()
-    //   tempDate.setUTCSeconds(this.getUTCSeconds() + parseInt(days)*86400);
-    //   return tempDate
-    // };
-  
+ 
     Date.prototype.addDays = function(days) {
       var date = new Date(this.valueOf());
       date.setDate(date.getDate() + days);
       return date;
     }
 
-    // let added_date = currentDate.addDays(4);
-    // console.log(added_date)
-    // this.state.period_dates.push(added_date)
     menarcheDateParsed = new Date(this.state.menarcheDate)
     const dates = []
     let startDate = menarcheDateParsed
-  
 
-    // for(let i=0; i<45; i++){
-    //   console.log(startDate.addDays(i))
-    // }
 
     for(let j=0;j<=480;j+=1){
       for(let i=0; i<this.state.averageDuration; i+=1){
@@ -85,7 +152,6 @@ class CycleScreen extends React.Component {
       }
     }
     this.setState({periodDates: dates})
-    console.log(this.state.periodDates)
     this.getMarkedDates()
   
   }
@@ -129,8 +195,23 @@ class CycleScreen extends React.Component {
     this.setState({numberDay: count})
   }
 
+  calculateAge = (menarche_date) => {
+    var today = new Date();
+    var birthDate = new Date(menarche_date);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age = age - 1;
+    }
+    this.setState({age: age})
+  }
+
   render() {
-     return (
+    let percentage = <Text style={styles.sync}>Your cycles are {this.state.percentageSynced}% synced</Text>
+    if(this.props.id == this.state.accountID) {
+      percentage = <Text></Text>
+    }
+    return (
   // <View style={{ 
   //  flex: 1,
   //  alignItems:'center',
@@ -139,11 +220,14 @@ class CycleScreen extends React.Component {
   <View style={styles.container}>
   <ScrollView contentContainerStyle={styles.contentContainer}>
   <View style={styles.infoContainer}>
-
-  <Text>Today is day number {this.state.numberDay}</Text>
-  <Text>Menarche Date: {this.state.menarcheDate}</Text>
+  <View>{percentage}</View>
+ 
+  <Text>Menarche Date: {this.state.menarcheDate} ({this.state.age} years old)</Text>
   <Text>Average Period Duration: {this.state.averageDuration} days</Text>
   <Text>Average Cycle Length: {this.state.averageLength} days</Text>
+  <Text style={styles.day}>Today is day number {this.state.numberDay}</Text>
+
+  {/* <Text style={styles.sync}>Your cycles are {this.state.percentageSynced}% synced</Text> */}
   </View>
   {/* <Text>{this.state.period_dates}</Text> */}
 

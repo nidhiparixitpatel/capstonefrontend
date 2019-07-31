@@ -1,32 +1,17 @@
-import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import {
-  Image,
-  Platform,
   ScrollView,
-  StyleSheet,
   Text,
-  TouchableOpacity,
   View,
-  Button,
   AsyncStorage,
 } from 'react-native';
-import { connect } from 'react-redux';
-import { addToken, addEmail, addId } from '../Actions';
-import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import NewsFeed from '../components/NewsFeed';
 import NewPostForm from '../components/NewPostForm';
 import NavBar from '../components/NavBar';
 import { Svg } from 'expo';
-import { Circle, Rect } from 'react-native-svg';
+import { Circle} from 'react-native-svg';
 import styles from '../stylesheets/HomeScreenStyles';
-// import * as Svg from 'react-native-svg';
-
-import { Actions } from 'react-native-router-flux';
-
-import { MonoText } from '../components/StyledText';
-import { ActionConst } from 'react-native-router-flux';
 
 class HomeScreen extends React.Component {
 
@@ -52,14 +37,12 @@ class HomeScreen extends React.Component {
   };
 
   addTokenToState = async () => {
-    const userToken = await AsyncStorage.getItem('token');
-    // this.props.addToken(userToken);
+    const userToken = await AsyncStorage.getItem('token')
     this.setState({token: userToken})
   };
 
   addIdToState = async () => {
     const id = await AsyncStorage.getItem('id');
-    // this.props.addId(id)
     this.setState({id: id})
   };
 
@@ -70,8 +53,6 @@ class HomeScreen extends React.Component {
     const AuthStr = 'Bearer '.concat(this.state.token)
     axios.get(`http://nivs-capstone.herokuapp.com/main/users/${this.state.id}/`, { headers: { "Authorization" : AuthStr }
       }).then((response) => {
-        // console.log(response.data.email)
-        // this.props.addEmail(response.data.email)
         this.setState({email: response.data.email })
         })
         .catch((error) => {
@@ -120,14 +101,6 @@ class HomeScreen extends React.Component {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
-          {/* <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
-            style={styles.welcomeImage}
-          /> */}
          <Svg
            height="100"
           width="100"
@@ -168,31 +141,6 @@ class HomeScreen extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   const { token } = state
-//   return { token }
-// };
-
-// const mapDispatchToProps = dispatch => (
-//   bindActionCreators({
-//     addToken,
-//     addEmail,
-//     addId,
-//   }, dispatch)
-// );
-
-// const Connected = connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
-// // export default connect(mapStateToProps)(HomeScreen);
-
-
-// class Test2 extends React.Component {
-  
-//   render(){
-//      return (<Connected/>);
-//   }
-// }
-
-// export default Test2;
 
 export default HomeScreen
 

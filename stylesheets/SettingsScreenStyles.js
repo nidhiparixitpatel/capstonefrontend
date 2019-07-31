@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 20,
     width: 300,
-    // paddingLeft: 60
   },
   title: {
     paddingTop: 40,

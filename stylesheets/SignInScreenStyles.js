@@ -23,14 +23,7 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 15,
     textAlign: 'center',
-    // width: 200,
-    // color: 'black',
     fontSize: 17,
-    // lineHeight: 40,
-    // borderBottomColor: 'lightgray',
-    // borderBottomWidth: 1,
-    // borderRadius: 5,
-    // marginLeft: 100
   },
 });
 

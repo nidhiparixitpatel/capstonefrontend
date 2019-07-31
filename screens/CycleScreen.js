@@ -1,9 +1,7 @@
 import React from 'react';
-import { Button, View, Text, ScrollView, AsyncStorage } from 'react-native';
-// import NewsFeed from '../components/NewsFeed';
-import { Actions } from 'react-native-router-flux';
+import { View, Text, ScrollView, AsyncStorage } from 'react-native';
 import NavBar from '../components/NavBar';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import {Calendar} from 'react-native-calendars';
 import axios from 'axios';
 import styles from '../stylesheets/CycleScreenStyles';
 
@@ -212,51 +210,24 @@ class CycleScreen extends React.Component {
       percentage = <Text></Text>
     }
     return (
-  // <View style={{ 
-  //  flex: 1,
-  //  alignItems:'center',
-  //  justifyContent:'center'
-  // }}>
-  <View style={styles.container}>
-  <ScrollView contentContainerStyle={styles.contentContainer}>
-  <View style={styles.infoContainer}>
-  <View>{percentage}</View>
+        <View style={styles.container}>
+          <ScrollView contentContainerStyle={styles.contentContainer}>
+            <View style={styles.infoContainer}>
+                <View>{percentage}</View>
  
-  <Text>Menarche Date: {this.state.menarcheDate} ({this.state.age} years old)</Text>
-  <Text>Average Period Duration: {this.state.averageDuration} days</Text>
-  <Text>Average Cycle Length: {this.state.averageLength} days</Text>
-  <Text style={styles.day}>Today is day number {this.state.numberDay}</Text>
+                  <Text>Menarche Date: {this.state.menarcheDate} ({this.state.age} years old)</Text>
+                  <Text>Average Period Duration: {this.state.averageDuration} days</Text>
+                  <Text>Average Cycle Length: {this.state.averageLength} days</Text>
+                  <Text style={styles.day}>Today is day number {this.state.numberDay}</Text>  
 
-  {/* <Text style={styles.sync}>Your cycles are {this.state.percentageSynced}% synced</Text> */}
-  </View>
-  {/* <Text>{this.state.period_dates}</Text> */}
+                </View>
 
-{/* <Calendar
-  // Collection of dates that have to be colored in a special way. Default = {}
-  markedDates={{
-    '2019-07-20': {textColor: 'green'},
-    '2019-07-22': {startingDay: true, color: 'red'},
-    '2019-07-24': {selected: true, endingDay: true, color: 'red', textColor: 'gray'},
-    '2019-07-27': {disabled: true, startingDay: true, color: 'red', endingDay: true}
-  }}
-  // Date marking style [simple/period/multi-dot/custom]. Default = 'simple'
-  markingType={'period'}
-/> */}
-
-<Calendar
-  // Collection of dates that have to be colored in a special way. Default = {}
-  // markedDates={{
-  //   '2019-07-20': {textColor: 'green'},
-  //   '2019-07-22': {startingDay: true, color: 'red'},
-  //   '2019-07-24': {selected: true, endingDay: true, color: 'red', textColor: 'gray'},
-  //   '2019-07-27': {disabled: true, startingDay: true, color: 'red', endingDay: true}
-  // }}
-  markedDates={this.state.markedDates}
-  // Date marking style [simple/period/multi-dot/custom]. Default = 'simple'
-  markingType={'period'}
-/>
-  </ScrollView>
-  <NavBar />
+                < Calendar
+                    markedDates={this.state.markedDates}
+                    markingType={'period'}
+                />
+                </ScrollView>
+              <NavBar />
   </View>
 );
 }

@@ -2,11 +2,9 @@ import React from 'react';
 import {
   ScrollView,
   Text,
-  TouchableOpacity,
   View,
   AsyncStorage,
   TextInput,
-  DatePickerIOS,
   Button
 } from 'react-native';
 import axios from 'axios';
@@ -153,14 +151,6 @@ export default class SettingsScreen extends React.Component {
     <View style={styles.cycle}>
     <Text style={styles.title}>Edit Cycle</Text>
 
-      {/* <Text>Menarche Date</Text>
-<View style={styles.picker}>
-    <DatePickerIOS
-          date={new Date()}
-          onDateChange={this.setDate}
-          mode="date"
-        />
-</View> */}
 
 <View style={styles.numeric}>
 <Text style={styles.text}>Average Cycle Length</Text>

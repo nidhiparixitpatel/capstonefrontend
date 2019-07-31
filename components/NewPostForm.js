@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import {
-  Text,
   View,
   TextInput,
   Button
 } from 'react-native';
-// import {Button} from 'react-native-elements'
 import axios from 'axios';
 import styles from '../stylesheets/NewPostFormStyles'
 

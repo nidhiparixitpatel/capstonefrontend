@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, View, Text, AsyncStorage } from 'react-native';
-// import NewsFeed from '../components/NewsFeed';
 import { Actions } from 'react-native-router-flux';
 import TabBarIcon from '../components/TabBarIcon';
 import { Platform } from 'react-native';
@@ -57,13 +56,7 @@ class NavBar extends React.Component {
       barColor: '#B71C1C',
       pressColor: 'rgba(255, 255, 255, 0.16)'
     },
-    // {
-    //   key: 'messages',
-    //   icon: 'mail',
-    //   label: 'Messages',
-    //   barColor: '#E64A19',
-    //   pressColor: 'rgba(255, 255, 255, 0.16)'
-    // }
+
   ]
 
   renderIcon = icon => ({ focused }) => (
@@ -91,9 +84,6 @@ class NavBar extends React.Component {
       case "profile":
         Actions.profile({id: this.state.id})
         break;
-      // case "messages":
-      //    Actions.messages()
-      //   break;
       case "home":
         Actions.home()
         break;
@@ -110,7 +100,6 @@ class NavBar extends React.Component {
  return (
   <View>
        <BottomNavigation
-          // onTabPress={newTab => this.setState({ activeTab: newTab.key })}
           onTabPress={(newTab) => this.goToPage(newTab.key)}
           renderTab={this.renderTab}
           tabs={this.tabs}

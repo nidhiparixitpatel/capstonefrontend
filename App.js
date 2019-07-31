@@ -9,7 +9,6 @@ import { createStore } from 'redux';
 import tokenReducer from './Reducer';
 import { Router, Scene } from 'react-native-router-flux';
 import HomeScreen from './screens/HomeScreen';
-import MessagesScreen from './screens/MessagesScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import CycleScreen from './screens/CycleScreen';
@@ -17,13 +16,7 @@ import SearchScreen from './screens/SearchScreen';
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import SignInScreen from './screens/SignInScreen';
 import RegisterScreen from './screens/RegisterScreen';
-import BeforeHomeScreen from './screens/AuthLoadingScreen';
-import MainTabNavigator from './navigation/MainTabNavigator';
 
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-import TabBarIcon from './components/TabBarIcon';
-
-import AppNavigator from './navigation/AppNavigator';
 
 const store = createStore(tokenReducer);
 
@@ -43,10 +36,10 @@ export default function App(props) {
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <Provider store={ store }>
-        {/* <AppNavigator /> */}
+  
           <Router hideNavBar="false">
           <Scene key="root">
-          {/* <Scene key="start" component={MainTabNavigator} title="start"/>  */}
+
           <Scene key="loading" component={AuthLoadingScreen} title="loading"/> 
           <Scene key="signin" component={SignInScreen} title="signin" hideNavBar={true}/> 
           <Scene key="register" component={RegisterScreen} title="Sign Up"/> 
@@ -54,7 +47,6 @@ export default function App(props) {
           <Scene key="settings" component={SettingsScreen} title="settings" hideNavBar={true}/>
           <Scene key="cycle" component={CycleScreen} title="cycle" hideNavBar={true} />
           <Scene key="profile" component={ProfileScreen} title="profile" hideNavBar={true}/> 
-          <Scene key="messages" component={MessagesScreen} title="messages" hideNavBar={true}/> 
           <Scene key="search" component={SearchScreen} title="search"  hideNavBar={true}/> 
         </Scene>
       </Router> 

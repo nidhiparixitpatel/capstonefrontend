@@ -1,8 +1,6 @@
 const React = require('react-native');
 const { Dimensions, StyleSheet } = React;
-// import {
-//   StyleSheet,
-// } from 'react-native';
+
 
 module.exports = StyleSheet.create({
   searchBarContainer: {
@@ -34,7 +32,6 @@ module.exports = StyleSheet.create({
   },
   textSearchButton: {
     flex: 1,
-    // backgroundColor: 'lightgray',
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
@@ -44,7 +41,7 @@ module.exports = StyleSheet.create({
   searchResultsContainer: {
     width: Dimensions.get('window').width - 20,
     alignItems: 'center',
-    flex: 9
+    flex: 92
   },
   resultLink: {
     display: 'flex',

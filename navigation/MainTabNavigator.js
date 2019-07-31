@@ -4,7 +4,6 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import MessagesScreen from '../screens/MessagesScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import CycleScreen from '../screens/CycleScreen';
@@ -35,21 +34,6 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const MessagesStack = createStackNavigator(
-  {
-    Messages: MessagesScreen,
-  },
-  config
-);
-
-MessagesStack.navigationOptions = {
-  tabBarLabel: 'Messages',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-mail' : 'md-mail'} />
-  ),
-};
-
-MessagesStack.path = '';
 
 
 const ProfileStack = createStackNavigator(
@@ -124,7 +108,6 @@ const tabNavigator = createBottomTabNavigator({
   CycleStack,
   HomeStack,
   ProfileStack,
-  MessagesStack,
   SearchStack,
   SettingsStack,
 }, {
@@ -134,14 +117,3 @@ const tabNavigator = createBottomTabNavigator({
 tabNavigator.path = '';
 
 export default tabNavigator;
-
-
-// const AppNavigator = createDrawerNavigator({
-//   Home: { screen: HomeStackNavigator },
-//   Calendar: { screen: CalendarStackNavigator },
-//   Profile: { screen: Profile },
-// }, {
-//   contentComponent: Menu,
-//   drawerWidth: widthPercentageToDP('100%'),
-//   initialRouteName: 'Calendar'
-// });

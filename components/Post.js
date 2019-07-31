@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Button,
-  AsyncStorage,
 } from 'react-native';
 import axios from 'axios';
 import TimeAgo from 'react-native-timeago';
 import styles from '../stylesheets/PostStyles';
 import { Actions } from 'react-native-router-flux';
 
-// import './Post.css';
 
 
 class Post extends Component {

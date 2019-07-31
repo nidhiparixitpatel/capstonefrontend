@@ -36,10 +36,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
   }
 
- 
-
- 
-
 });
 
 export default styles

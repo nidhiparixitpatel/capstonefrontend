@@ -32,7 +32,7 @@ export default class RegisterScreen extends React.Component {
     console.log(this.state.email)
     console.log(this.state.password1)
     event.preventDefault();
-        /* Here is where all the login logic will go. Upon clicking the login button, we would like to utilize a login method that will send our entered credentials over to the server for verification. Once verified, it should store your token and send you to the protected route. */
+      
         axios.post("http://172.24.47.79:8000/main/auth/registration",{
           "username" : `${this.state.email}`,
           "email" : `${this.state.email}`,
@@ -42,7 +42,7 @@ export default class RegisterScreen extends React.Component {
         .then((response) => {
           console.log(response)
           this.setState({userid: response.data.user.pk})
-          // this.setCycle()
+        
           this.setProfile()
           Actions.signin()
         })

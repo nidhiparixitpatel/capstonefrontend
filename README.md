@@ -15,7 +15,7 @@ We live in an incredibly misogynistic world where any product or service that re
 ## Log In
 To log in, you can use demo user: esme@gmail.com, password: unioncity.
 
-##Features
+## Features
 
 - Dashboard displays newsfeed with posts from other users
 - Cycle information shows average cycle length, average period duration, menarche date, and a calendar with past and future period dates
